@@ -12,7 +12,9 @@ RUN pip install --no-cache-dir \
     uvicorn==0.29.0 \
     requests==2.31.0 \
     pydantic==2.5.0 \
-    python-multipart==0.0.6
+    python-multipart==0.0.6 \
+    supabase==2.18.1
+    
 
 # Copy only main.py and database.py (or all .py files)
 COPY main.py database.py ai_engine.py ./
