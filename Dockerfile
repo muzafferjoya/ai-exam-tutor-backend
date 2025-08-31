@@ -18,8 +18,6 @@ RUN pip install --no-cache-dir \
 # Copy only main.py and database.py (or all .py files)
 COPY main.py database.py ai_engine.py ./
 
-# Optional: Copy if you have other modules
-COPY __init__.py ./  # if exists
 
 # Run the app
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
