@@ -1,22 +1,25 @@
 # backend/Dockerfile
 FROM python:3.11.8-slim
 
-# Install git first (needed for supabase-py from GitHub)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 # Upgrade pip
 RUN pip install --upgrade pip
 
-# Copy requirements and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install FastAPI, Uvicorn, and supabase.py (directly, guaranteed to work)
+RUN pip install --no-cache-dir \
+    fastapi==0.110.0 \
+    uvicorn==0.29.0 \
+    requests==2.31.0 \
+    pydantic==2.5.0 \
+    python-multipart==0.0.6 \
+    "supabase.py==2.18.1"
 
-# Copy the rest of the app
-COPY . .
+# Copy only main.py and database.py (or all .py files)
+COPY main.py database.py ai_engine.py ./
 
-# Run the FastAPI server
+# Optional: Copy if you have other modules
+COPY __init__.py ./  # if exists
+
+# Run the app
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
