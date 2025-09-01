@@ -2,15 +2,6 @@ FROM python:3.11.8-slim
 
 WORKDIR /app
 
-# Install system dependencies required for many Python packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libffi-dev \
-    libssl-dev \
-    curl \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
 # Upgrade pip
 RUN pip install --upgrade pip
 
@@ -19,7 +10,7 @@ RUN pip install --no-cache-dir \
     fastapi==0.110.0 \
     uvicorn==0.29.0 \
     requests==2.31.0 \
-    pydantic==2.5.0 \
+    pydantic==2.11.7 \
     python-multipart==0.0.6 \
     supabase==2.18.1
 
