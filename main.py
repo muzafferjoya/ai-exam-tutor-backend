@@ -16,7 +16,6 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://13.217.103.47:8000",
         "https://ai-exam-tutor-frontend.vercel.app",
         "http://localhost:3000"
     ],
